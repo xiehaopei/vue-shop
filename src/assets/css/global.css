@@ -29,3 +29,6 @@ body,
   margin: 7px;
 }
 
+.el-cascader-menu {
+  height: 300px;
+}

@@ -4,7 +4,8 @@ import Login from '../components/Login.vue'
 
 Vue.use(VueRouter)
 
-const routes = [{
+const routes = [
+  {
     path: '/',
     redirect: '/login'
   },
@@ -16,7 +17,8 @@ const routes = [{
     path: '/home',
     component: () => import('../components/home.vue'),
     redirect: '/welcome',
-    children: [{
+    children: [
+      {
         path: '/welcome',
         component: () => import('../components/Welcome.vue')
       },
@@ -31,6 +33,10 @@ const routes = [{
       {
         path: '/roles',
         component: () => import('../components/power/Roles.vue')
+      },
+      {
+        path: '/categories',
+        component: () => import('../components/goods/Cate.vue')
       }
     ]
   }
