@@ -5,37 +5,37 @@
       <div>
         <span>电商后台管理系统</span>
       </div>
-      <el-button type="info" @click="out">退出</el-button>
+      <el-button type="info"
+                 @click="out">退出</el-button>
     </el-header>
     <!-- 页面主体 -->
     <el-container>
       <!-- 侧边栏内容 -->
       <el-aside :width="isCollapse? '64px':'200px'">
-        <div class="toggle-button" @click="toggleCollapse">|||</div>
-        <el-menu
-          background-color="#333744"
-          text-color="#fff"
-          active-text-color="#409EFF"
-          :unique-opened="true"
-          :collapse="isCollapse"
-          :collapse-transition="false"
-          :router="true"
-          :default-active="activePath"
-        >
+        <div class="toggle-button"
+             @click="toggleCollapse">|||</div>
+        <el-menu background-color="#333744"
+                 text-color="#fff"
+                 active-text-color="#409EFF"
+                 :unique-opened="true"
+                 :collapse="isCollapse"
+                 :collapse-transition="false"
+                 :router="true"
+                 :default-active="activePath">
           <!-- 一级菜单 -->
-          <el-submenu :index="item.id+''" v-for="item in menuList" :key="item.id">
+          <el-submenu :index="item.id+''"
+                      v-for="item in menuList"
+                      :key="item.id">
             <!-- 一级菜单模板区域 -->
             <template slot="title">
               <i :class="iconObj[item.id]"></i>
               <span>{{item.authName}}</span>
             </template>
             <!-- 二级菜单 -->
-            <el-menu-item
-              :index="'/'+subItem.path"
-              v-for="subItem in item.children"
-              :key="subItem.index"
-              @click="saveNavState('/'+subItem.path)"
-            >
+            <el-menu-item :index="'/'+subItem.path"
+                          v-for="subItem in item.children"
+                          :key="subItem.index"
+                          @click="saveNavState('/'+subItem.path)">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>{{subItem.authName}}</span>
@@ -56,7 +56,7 @@
 //import x from ''
 export default {
   components: {},
-  data() {
+  data () {
     return {
       //左侧菜单
       menuList: [],
@@ -71,34 +71,34 @@ export default {
       //是否触发折叠
       isCollapse: false,
       //保存动态链接
-      activePath:''
+      activePath: ''
     }
   },
   computed: {},
   methods: {
     //退出
-    out() {
+    out () {
       window.sessionStorage.clear()
       this.$router.push('/login')
     },
     //获取菜单
-    async getMenuList() {
-      const { data: res } = await this.$http.get('menus')
+    async getMenuList () {
+      const { data: res } = await this.$http.get('menus').catch(err => err)
       if (res.meta.status !== 200) return this.$message.error(res.meta.msg)
       this.menuList = res.data
       console.log(res)
     },
     //折叠/展开菜单
-    toggleCollapse() {
+    toggleCollapse () {
       this.isCollapse = !this.isCollapse
     },
     //保存链接存放状态
-    saveNavState(activePath) {
+    saveNavState (activePath) {
       window.sessionStorage.setItem('activePath', activePath)
       this.activePath = window.sessionStorage.getItem('activePath')
     }
   },
-  created() {
+  created () {
     this.getMenuList()
     this.activePath = window.sessionStorage.getItem('activePath')
   }
