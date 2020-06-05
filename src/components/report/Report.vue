@@ -1,6 +1,6 @@
 <!-- 组件说明 -->
 <template>
-  <div class=''>
+  <div class="">
     <!-- 面包屑 -->
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
@@ -10,8 +10,7 @@
 
     <!-- 卡片 -->
     <el-card>
-      <div id="main"
-           style="width: 800px;height:400px;"></div>
+      <div id="main" style="width: 800px;height:400px;"></div>
     </el-card>
   </div>
 </template>
@@ -23,10 +22,8 @@ import _ from 'lodash'
 
 //import x from ''
 export default {
-  components: {
-
-  },
-  data () {
+  components: {},
+  data() {
     return {
       options: {
         title: {
@@ -58,21 +55,18 @@ export default {
           }
         ]
       }
-    };
+    }
   },
-  computed: {
-
-  },
-  methods: {
-
-  },
-  async mounted () {
+  computed: {},
+  methods: {},
+  async mounted() {
     // 基于准备好的dom，初始化echarts实例
-    let myChart = echarts.init(document.getElementById('main'));
+    let myChart = echarts.init(document.getElementById('main'))
 
     //获取报表数据
     const { data: res } = await this.$http.get('reports/type/1')
-    if (res.meta.status !== 200) return this.$message.error('获取报表数据失败！')
+    if (res.meta.status !== 200)
+      return this.$message.error('获取报表数据失败！')
 
     //合并对象
     const result = _.merge(res.data, this.options)
@@ -80,7 +74,7 @@ export default {
 
     // 绘制图表
     myChart.setOption(result)
-  },
+  }
 }
 </script>
 

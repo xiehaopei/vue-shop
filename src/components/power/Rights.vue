@@ -16,9 +16,13 @@
         <el-table-column prop="path" label="路径"></el-table-column>
         <el-table-column prop="level" label="权限等级">
           <template v-slot:default="SlotProps">
-            <el-tag type="success" v-if="SlotProps.row.level === '0'">一级</el-tag>
+            <el-tag type="success" v-if="SlotProps.row.level === '0'"
+              >一级</el-tag
+            >
             <el-tag type="info" v-if="SlotProps.row.level === '1'">二级</el-tag>
-            <el-tag type="warning" v-if="SlotProps.row.level === '2'">三级</el-tag>
+            <el-tag type="warning" v-if="SlotProps.row.level === '2'"
+              >三级</el-tag
+            >
           </template>
         </el-table-column>
       </el-table>
